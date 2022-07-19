@@ -60,6 +60,11 @@ const login = async (req, res) => {
     return;
   }
 
+  if(!password) {
+    res.status(422).json({ errors: ["Por favor, informe sua senha!"] });
+    return;
+  }
+
   if (!(await bcrypt.compare(password, user.password))) {
     res.status(422).json({ errors: ["Senha inválida"] });
     return;
